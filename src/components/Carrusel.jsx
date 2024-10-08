@@ -47,7 +47,7 @@ export default function Carrusel({ carruselData }) {
         {carruselData
           .slice(currentIndex, currentIndex + imagesPerView)
           .map((item, index) => (
-            <div key={index} className="relative w-full h-[300px]">
+            <div key={index} className="relative w-[370px] h-[300px]">
               <img
                 src={item.src}
                 alt={item.title}
