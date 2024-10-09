@@ -11,7 +11,7 @@ export default function Footer() {
   ];
   return (
     <>
-      <div className="flex flex-col md:flex-row w-full md:h-fit pt-4 h-[50vh] mx-4 items-start md:justify-between gap-4 my-4 justify-between bg-black border-t-2 border-gray-500 px-2 text-white">
+      <div className="flex flex-col md:flex-row w-full md:h-fit pt-4 h-[50vh] mx-4 items-start md:justify-between gap-4 my-5 justify-between bg-black border-t-2 border-gray-500 px-2 text-white">
         <div className="flex gap-4 flex-col md:mt-4">
           {routes.map((route) => (
             <NavLink

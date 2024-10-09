@@ -17,14 +17,14 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-neutral-900/80 h-full grid grid-cols-3 py-2 px-6">
+    <nav className="bg-neutral-900/80 md:grid md:grid-cols-3 h-full flex justify-between items-center py-2 px-6">
       <NavLink to="/">
-        <h1 className="text-3xl text-white font-bold w-fit  mt-4 hover:underline">
+        <h1 className="md:text-3xl text-2xl text-white font-bold md:w-fit w-[10vw] hover:underline">
         My Tinerary
         </h1>
       </NavLink>
       <NavLink to="/">
-        <img src={logo} alt="Logo" className="h-[12vh] rounded-full mx-auto" />
+        <img src={logo} alt="Logo" className="h-[10vh] md:h-[12vh]  rounded-full mx-auto" />
       </NavLink>
 
      
@@ -34,7 +34,7 @@ export default function NavBar() {
 
       
       <ul
-        className={`lg:flex gap-4 lg:mr-2 items-center my-auto justify-end text-white text-xl font-bold absolute lg:static top-[126px] left-0 w-full bg-neutral-900/80 lg:bg-transparent transition-all duration-700 ease-in-out overflow-hidden ${
+        className={`lg:flex gap-4 lg:mr-2 items-center my-auto justify-end text-white text-xl font-bold absolute lg:static top-[128px] left-0 w-full bg-neutral-900/80 lg:bg-transparent transition-all duration-700 ease-in-out overflow-hidden ${
           isOpen ? "max-h-[500px]" : "max-h-0 lg:max-h-[500px]"
         }`}
       >
@@ -52,7 +52,7 @@ export default function NavBar() {
             >
               {r.text === "login" ? (
                 <>
-                  <IoPersonSharp className="mr-2" />
+                  <IoPersonSharp className="" />
                   {r.text}
                 </>
               ) : (

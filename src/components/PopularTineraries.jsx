@@ -6,7 +6,7 @@ import ButtonAccion from "./ButtonAccion";
 export default function PopularTineraries() {
  
   return (
-    <div className="bg-black p-10 text-white lg:grid gap-3 lg:grid-cols-3 grid-flow-col lg:justify-items-center items-center md:h-full h-[120vh]">
+    <div className="bg-black p-10 text-white lg:grid gap-3 lg:grid-cols-3 grid-flow-col lg:justify-items-center items-center md:h-full h-fit">
       <article className="bg-slate-600 p-6 text-slate-300 grid my-auto  rounded-2xl w-full lg:h-[60vh]  xl:h-[660px]">
         <h2 className="text-3xl font-bold">Discover your dream getaway</h2>
         <p className="text-2xl  mb-2">
