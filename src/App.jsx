@@ -1,33 +1,32 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./page/home.jsx";
-import Cities from "./page/cities.jsx";
+import Cities from "./page/Cities.jsx";
 import NotFound from "./page/NotFound.jsx";
-import './App.css';
-import StandarLayout from './Layouts/StandarLayout';
+import Detail from "./page/Detail.jsx";
+import "./App.css";
+import StandarLayout from "./Layouts/StandarLayout";
 
 const router = createBrowserRouter([
   {
-    element: <StandarLayout></StandarLayout>, children: [
-      {path: '/', element: <Home></Home>},
-      {path: '/Cities', element: <Cities></Cities>},
+    element: <StandarLayout></StandarLayout>,
+    children: [
+      { path: "/", element: <Home></Home> },
+      { path: "/Cities", element: <Cities></Cities> },
+      { path: "/detail/:id", element: <Detail></Detail> },
     ],
   },
   {
-    path: '/*',
-    element: <NotFound></NotFound>
-  }
-
-])
+    path: "/*",
+    element: <NotFound></NotFound>,
+  },
+]);
 
 function App() {
-
-
   return (
     <>
-    <RouterProvider router={router}></RouterProvider>
-   
+      <RouterProvider router={router}></RouterProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
