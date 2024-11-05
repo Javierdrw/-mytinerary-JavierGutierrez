@@ -62,7 +62,7 @@ const DetailItinerary = () => {
             to={`/detailCity/${itineraryId.city}`}
             className="mt-2 mx-2 bg-blue-500 w-[150px] h-[40px] items-center font-bold flex justify-center text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors duration-300"
           >
-            View More
+            Go Back
           </NavLink>
         </div>
       ) : (
