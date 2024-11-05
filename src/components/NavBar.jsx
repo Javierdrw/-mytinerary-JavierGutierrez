@@ -17,7 +17,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-neutral-900/80 md:grid md:grid-cols-3 h-full flex justify-between items-center py-2 px-6">
+    <nav className="bg-neutral-900/80 md:grid md:grid-cols-3 h-[15vh] flex justify-between items-center py-2 px-6 fixed top-0 w-full z-50 shadow-lg">
       <NavLink to="/">
         <h1 className="md:text-3xl text-2xl text-white font-bold md:w-fit w-[10vw] hover:underline">
           My Tinerary
@@ -27,7 +27,7 @@ export default function NavBar() {
         <img
           src={logo}
           alt="Logo"
-          className="h-[10vh] md:h-[12vh]  rounded-full mx-auto"
+          className="h-[10vh] md:h-[12vh] rounded-full mx-auto"
         />
       </NavLink>
 
