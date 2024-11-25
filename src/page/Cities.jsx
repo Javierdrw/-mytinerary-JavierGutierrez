@@ -33,7 +33,7 @@ export default function Cities() {
 
   return (
     <>
-      <div className="bg-slate-200 pt-2">
+      <div className="bg-gradient-to-r from-blue-500 to-green-400 pt-2">
 <Search></Search>
 
         {filterCities.length === 0 ? (

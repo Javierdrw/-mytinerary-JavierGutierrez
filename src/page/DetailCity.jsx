@@ -64,38 +64,38 @@ const DetailCity = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div className="flex items-center">
                 <FaFlag className="text-blue-500 mr-2" />
-                <span className="font-semibold">Country:</span> {city.Country}
+                <span className="font-semibold">Country: &nbsp;</span> {city.Country}
               </div>
               <div className="flex items-center">
                 <FaGlobe className="text-green-500 mr-2" />
-                <span className="font-semibold">Continent:</span>{" "}
+                <span className="font-semibold">Continent: &nbsp; </span>{" "}
                 {city.Continent}
               </div>
               <div className="flex items-center">
                 <FaMoneyBillWave className="text-yellow-500 mr-2" />
-                <span className="font-semibold">Currency:</span> {city.Currency}
+                <span className="font-semibold">Currency:&nbsp; </span> {city.Currency}
               </div>
               <div className="flex items-center">
                 <FaLanguage className="text-red-500 mr-2" />
-                <span className="font-semibold">Languages:</span>{" "}
+                <span className="font-semibold">Languages:&nbsp; </span>{" "}
                 {city.Language}
               </div>
               <div className="flex items-center">
                 <FaCity className="text-purple-500 mr-2" />
-                <span className="font-semibold">Population:</span>{" "}
+                <span className="font-semibold">Population:&nbsp; </span>{" "}
                 {city.Population.toLocaleString()}
               </div>
               <div className="flex items-center">
                 <FaUserShield className="text-gray-500 mr-2" />
-                <span className="font-semibold">Security:</span> {city.Security}
+                <span className="font-semibold">Security:&nbsp; </span> {city.Security}
               </div>
               <div className="flex items-center">
                 <FaTemperatureHigh className="text-orange-500 mr-2" />
-                <span className="font-semibold">Climate:</span> {city.Climate}
+                <span className="font-semibold">Climate:&nbsp; <span className="font-normal">{city.Climate}</span> </span> 
               </div>
               <div className="flex items-center">
                 <FaCity className="text-indigo-500 mr-2" />
-                <span className="font-semibold">Economy:</span> {city.Economy}
+                <span className="font-semibold">Economy:&nbsp; </span> {city.Economy}
               </div>
             </div>
 

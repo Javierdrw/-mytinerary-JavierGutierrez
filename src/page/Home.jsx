@@ -1,9 +1,74 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PopularTineraries from "../components/PopularTineraries";
 import ButtonAccion from "../components/ButtonAccion";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { setUser} from "../Store/actions/authAction";
+
+const loginWithToken = async (token) => {
+  try {
+    const response = await axios.get("http://localhost:8080/api/auth/validateToken", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data.user; // Devuelve el usuario si es válido
+  } catch (error) {
+    console.error("Error validando el token:", error);
+    return null; // O lanza un error si prefieres manejarlo en otro lado
+  }
+};
+
 
 export default function Home() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  if(localStorage.getItem("UserItinerary")) {
+    const dataUser = JSON.parse(localStorage.getItem("UserItinerary"));
+    dispatch(setUser({ user: dataUser.user, token: dataUser.token }));
+  }
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    
   
+    if (token) {
+      loginWithToken(token).then((user) => {
+        if (user) {
+          dispatch(setUser({ user, token }));
+          localStorage.setItem("UserItinerary", JSON.stringify({ token, user }));
+          navigate("/");
+          window.location.reload();
+        } else {
+          console.error("Invalid token received from Google");
+        }
+      });
+    } else {
+      const storedData = localStorage.getItem("UserItinerary");
+      if (storedData) {
+        const parsedData = JSON.parse(storedData);
+        if (parsedData.token) {
+          loginWithToken(parsedData.token).then((user) => {
+            if (user) {
+              dispatch(setUser({ user, token: parsedData.token }));
+            } else {
+              setUser(null);
+              console.error("Token almacenado no es válido");
+              localStorage.removeItem("UserItinerary");
+              window.location.reload();
+            }
+          });
+        }
+      }
+    }
+  }, [navigate, dispatch]);
+  
+
   return (
     <>
       <div className="flex flex-col text-white justify-center gap-2 items-center h-[86vh] ">

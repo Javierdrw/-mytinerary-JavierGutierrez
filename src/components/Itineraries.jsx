@@ -43,7 +43,7 @@ const Itineraries = () => {
                     alt={itinerary.name}
                   />
                   <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2 text-lg font-bold">
-                    {itinerary.name}
+                    {itinerary.name.charAt(0).toUpperCase()+itinerary.name.slice(1)}
                   </div>
                 </div>
                 <div className="p-4 space-y-2">
