@@ -23,7 +23,7 @@ const authReducer = createReducer(initialState, (builder) => {
     })
     .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "An unknown error occurred"; // `action.payload` contiene el mensaje del error
+        state.error = action.payload || "An unknown error occurred";
         state.user = null;
         state.token = null;
       })
@@ -41,7 +41,7 @@ const authReducer = createReducer(initialState, (builder) => {
     })
     .addCase(validateToken.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "An unknown error occurred"; // `action.payload` contiene el mensaje del error
+        state.error = action.payload || "An unknown error occurred"; 
         state.user = null;
         state.token = null;
       })

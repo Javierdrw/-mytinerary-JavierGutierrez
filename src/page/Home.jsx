@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PopularTineraries from "../components/PopularTineraries";
 import ButtonAccion from "../components/ButtonAccion";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setUser} from "../Store/actions/authAction";
@@ -14,10 +14,10 @@ const loginWithToken = async (token) => {
       },
     });
 
-    return response.data.user; // Devuelve el usuario si es válido
+    return response.data.user; 
   } catch (error) {
     console.error("Error validando el token:", error);
-    return null; // O lanza un error si prefieres manejarlo en otro lado
+    return null;
   }
 };
 

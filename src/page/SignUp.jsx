@@ -265,7 +265,8 @@ const SignUp = () => {
             <select
               id="country"
               name="country"
-              value={formData.country} // Asegúrate de incluir `country` en tu estado de formulario
+              value={formData.country} 
+              formulario
               onChange={handleChange}
               className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500"
               required
