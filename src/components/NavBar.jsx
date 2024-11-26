@@ -11,6 +11,12 @@ const routes = [
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [photo, setPhoto] = useState(null);
+ useEffect(() => {
+  if (user) {
+    setPhoto(user.Photo);
+  }
+ },[user]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -55,7 +61,7 @@ export default function NavBar() {
       </button>
 
       <ul
-        className={`lg:flex gap-4 lg:mr-2 items-center my-auto justify-end text-white text-xl font-bold absolute lg:static top-[128px] left-0 w-full bg-neutral-900/80 lg:bg-transparent transition-all duration-700 ease-in-out overflow-hidden z-40 ${
+        className={`lg:flex gap-4 lg:mr-2 items-center my-auto justify-end text-white text-xl font-bold absolute lg:static top-[128px] left-0 w-fit bg-neutral-900/80 lg:bg-transparent transition-all duration-700 ease-in-out overflow-hidden z-40 ${
           isOpen ? "max-h-[500px]" : "max-h-0 lg:max-h-[500px]"
         }`}
       >
@@ -75,9 +81,9 @@ export default function NavBar() {
         <li className="p-3">
           {user ? (
             <div className="flex items-center gap-2">
-              {user.Photo && user.Photo.trim() ? (
+              {photo ? (
                 <img
-                  src={user.Photo}
+                  src={photo}
                   alt="User"
                   className="w-10 h-10 rounded-full"
                 />
@@ -100,6 +106,15 @@ export default function NavBar() {
               </button>
             </div>
           ) : (
+            <div className="flex items-center gap-2">
+              <NavLink
+              onClick={toggleMenu}
+              to="/signup"
+              className="bg-blue-500 text-white px-4 py-2 w-[128px] transition-all duration-300 ease-in-out rounded hover:bg-blue-700 flex items-center"
+            >
+              <IoPersonSharp />
+              Sign Up
+            </NavLink>
             <NavLink
               onClick={toggleMenu}
               to="/login"
@@ -108,6 +123,7 @@ export default function NavBar() {
               <IoPersonSharp />
               Login
             </NavLink>
+            </div>
           )}
         </li>
       </ul>

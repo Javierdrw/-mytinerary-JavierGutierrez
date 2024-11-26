@@ -42,6 +42,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -55,10 +56,13 @@ const SignUp = () => {
       setError(response.data.message);
       console.log(response.data.token);
     } catch (err) {
+      if (err.response.data.message === "Email already exists") {
+        setModalOpen(true)}
       console.error(err.response.data.message);
       setError(err.response.data.message);
     }
   };
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -186,29 +190,35 @@ const SignUp = () => {
             ) : null}
           </div>
           <div className="flex flex-col relative">
-            <label htmlFor="Password" className="font-medium">
-              Password
-            </label>
-            <input
-              type={showPassword ? "text" : "password"}
-              id="Password"
-              name="Password"
-              placeholder="Enter your password"
-              value={formData.Password}
-              onChange={handleChange}
-              minLength={8}
-              maxLength={128}
-              pattern=".{8,128}"
-              title="Password must be between 8 and 128 characters"
-              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500"
-              required
-            />
-            {(formData.Password.length < 8 || formData.Password.length > 128) &&
-            formData.Password.length > 0 ? (
-              <p className="text-red-500 text-sm mt-1">
-                Password must be between 8 and 128 characters
-              </p>
-            ) : null}
+           <label htmlFor="Password" className="font-medium">
+             Password
+           </label>
+           <input
+             type={showPassword ? "text" : "password"}
+             id="Password"
+             name="Password"
+             placeholder="Enter your password"
+             value={formData.Password}
+             onChange={handleChange}
+             minLength={8}
+             maxLength={20}
+             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*+?&])[A-Za-z\d@$!%*?&+]{8,20}$"
+             title="Password must include at least one lowercase letter, one uppercase letter, one number and one special character (@$!%*+?&)"
+             className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500"
+             required
+           />
+           {(formData.Password.length < 8 || formData.Password.length > 20) &&
+           formData.Password.length > 0 ? (
+             <p className="text-red-500 text-sm mt-1">
+               Password must be between 8 and 20 characters
+             </p>
+           ) : null}
+           {!formData.Password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*+?&])[A-Za-z\d@$!%*?&+]{8,20}$/) &&
+           formData.Password.length > 0 ? (
+             <p className="text-red-500 text-sm mt-1">
+               Password must include at least one lowercase letter, one uppercase letter, one number and one special character (@$!%*+?&)
+             </p>
+           ) : null}
             <button
               type="button"
               onClick={togglePasswordVisibility}
@@ -253,7 +263,8 @@ const SignUp = () => {
               onChange={handleChange}
               className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500"
               required
-            ><option selected >Select</option>
+            >
+              <option defaultValue={"Select"}>Select </option>
               <option value="client">Client</option>
               <option value="collaborator">Collaborator</option>
             </select>
@@ -265,8 +276,7 @@ const SignUp = () => {
             <select
               id="country"
               name="country"
-              value={formData.country} 
-              formulario
+              value={formData.country}
               onChange={handleChange}
               className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500"
               required
@@ -295,6 +305,30 @@ const SignUp = () => {
           </button>
         </form>
       </div>
+      {modalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+            <h3 className="text-xl font-semibold text-center mb-4 text-red-600">
+              Email already exists
+            </h3>
+            <p className="text-center mb-6">The email you entered is already registered. Please log in.</p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={() => navigate("/login")} // Navigate to login
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+              >
+                Go to Login
+              </button>
+              <button
+                onClick={() => setModalOpen(false)} // Close the modal
+                className="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

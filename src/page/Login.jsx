@@ -13,6 +13,7 @@ const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { loading, error } = useSelector((state) => state.auth);
 
@@ -32,13 +33,21 @@ const Login = () => {
         navigate("/");
         window.location.reload();
       }
-    } catch (error) {}
+    } catch (error) {
+
+      if (error === "User not found") {
+        setIsModalOpen(true);
+      }
+    }
   };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
   const loginWithGoogle = () => {
     window.location.href = "http://localhost:8080/api/auth/signIn/google";
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -103,7 +112,6 @@ const Login = () => {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
-          
           >
             {loading ? "Logging in..." : "Log In"}
           </button>
@@ -122,22 +130,52 @@ const Login = () => {
         </div>
 
         <button
-          onClick={() => loginWithGoogle()} 
+          onClick={() => loginWithGoogle()}
           className="w-full bg-orange-50 py-3 rounded-md font-semibold flex items-center justify-center hover:bg-orange-200 transition duration-300 border-2 border-orange-400"
         >
           <FcGoogle className="mr-2 text-2xl" />
           Sign In with Google
         </button>
 
-        <div className="mt-6 flex justify-between text-sm text-gray-600">
+        <div className="mt-6 flex justify-between items-center text-sm text-gray-600">
           <a href="/recover-Password" className="hover:underline">
             Forgot Password?
           </a>
-          <NavLink to="/signUp" className="hover:underline">
-            Don’t have an account? Sign Up
-          </NavLink>
+          <p>
+            Don’t have an account? <span>   </span> 
+            <NavLink to="/signUp" className="hover:underline text-lg font-bold text-blue-600">
+                 Sign Up
+            </NavLink>
+          </p>
         </div>
       </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full">
+            <h3 className="text-lg font-bold text-center mb-4">
+              User Not Found
+            </h3>
+            <p className="text-center text-gray-700 mb-4">
+              It seems like you don’t have an account yet. Would you like to
+              create one?
+            </p>
+            <div className="flex justify-around">
+              <NavLink
+                to="/signUp"
+                className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
+              >
+                Sign Up
+              </NavLink>
+              <button
+                onClick={closeModal}
+                className="bg-gray-300 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-300"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
