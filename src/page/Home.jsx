@@ -8,7 +8,7 @@ import { setUser} from "../Store/actions/authAction";
 
 const loginWithToken = async (token) => {
   try {
-    const response = await axios.get("http://localhost:8080/api/auth/validateToken", {
+    const response = await axios.get("https://mytinerary-back-javiergutierrez.onrender.com/api/auth/validateToken", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

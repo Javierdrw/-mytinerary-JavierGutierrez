@@ -44,7 +44,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const loginWithGoogle = () => {
-    window.location.href = "http://localhost:8080/api/auth/signIn/google";
+    window.location.href = "https://mytinerary-back-javiergutierrez.onrender.com/api/auth/signIn/google";
   };
   const closeModal = () => {
     setIsModalOpen(false);

@@ -5,7 +5,7 @@ const login = createAsyncThunk(
   "auth/sagnIn",
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/signIn", credentials);
+      const response = await axios.post("https://mytinerary-back-javiergutierrez.onrender.com/api/auth/signIn", credentials);
       return response.data; 
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -21,7 +21,7 @@ const validateToken = createAsyncThunk(
   async (token, thunkAPI) => {
     try {
       
-      const response = await axios.get("http://localhost:8080/api/auth/validateToken", {
+      const response = await axios.get("https://mytinerary-back-javiergutierrez.onrender.com/api/auth/validateToken", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

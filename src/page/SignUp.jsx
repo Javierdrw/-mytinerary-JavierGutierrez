@@ -49,7 +49,7 @@ const SignUp = () => {
       const userData = { ...formData };
       delete userData.confirmPassword;
       const response = await axios.post(
-        "http://localhost:8080/api/user/create",
+        "https://mytinerary-back-javiergutierrez.onrender.com/api/user/create",
         userData
       );
       navigate("/?token=" + response.data.token);
